@@ -1,0 +1,460 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Outfit', sans-serif;
+    color: #333;
+    overflow-x: hidden;
+    background: linear-gradient(-45deg, #ff9a9e, #fecfef, #fbc2eb, #a18cd1);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    perspective: 1000px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    padding: 60px 40px;
+    box-shadow: 0 15px 35px rgba(233, 30, 99, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.6);
+    text-align: center;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    display: none;
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.card.hidden {
+    display: none !important;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: -webkit-linear-gradient(45deg, #ff0844 0%, #ffb199 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #c2185b;
+    margin-bottom: 35px;
+    line-height: 1.4;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    height: 50px;
+    /* give it space for absolute dodging button */
+}
+
+.btn {
+    padding: 15px 35px;
+    font-size: 1.2rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.btn-yes {
+    background: linear-gradient(45deg, #ff4081, #d81b60);
+    box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
+    animation: pulseButton 2s infinite;
+}
+
+@keyframes pulseButton {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px rgba(216, 27, 96, 0.7);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
+    }
+}
+
+.btn-yes:hover {
+    background: linear-gradient(45deg, #d81b60, #ad1457);
+}
+
+.btn-no {
+    background: linear-gradient(45deg, #ffffff, #f0f0f0);
+    color: #c2185b;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    /* Required for dodging */
+}
+
+.btn-no:hover {
+    background: #e0e0e0;
+}
+
+.center-btn {
+    margin: 0 auto;
+    display: block;
+    margin-top: 30px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Typography for Surprise Card */
+#surprise-card {
+    background: radial-gradient(circle at center, #fce4ec 0%, #f8bbd0 100%);
+    position: relative;
+    width: 100%;
+    min-height: 650px;
+    padding: 60px 15px 80px 15px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+#surprise-card.card.active {
+    display: flex !important;
+}
+
+.bunting {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 100%;
+    font-size: 35px;
+    letter-spacing: 5px;
+    text-align: center;
+    z-index: 1;
+}
+
+.top-balloons {
+    position: absolute;
+    top: 5px;
+    left: -10px;
+    font-size: 70px;
+    transform: rotate(15deg);
+    z-index: 1;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.bottom-balloons {
+    position: absolute;
+    bottom: 20px;
+    right: -10px;
+    font-size: 80px;
+    transform: rotate(-10deg);
+    z-index: 1;
+    filter: drop-shadow(-2px -4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.gifts {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    font-size: 40px;
+    text-align: center;
+    letter-spacing: 5px;
+    z-index: 1;
+}
+
+#surprise-title {
+    position: relative;
+    z-index: 10;
+    margin-bottom: 20px;
+}
+
+.happy-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #c2185b;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+.cursive-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4.5rem;
+    color: #d81b60;
+    font-weight: 700;
+    line-height: 1.1;
+    display: block;
+    margin-top: -5px;
+    text-shadow: 1px 1px 2px rgba(216, 27, 96, 0.2);
+}
+
+#surprise-desc {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #212121;
+    font-weight: 500;
+    line-height: 1.5;
+    position: relative;
+    z-index: 10;
+    padding: 0 10px;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.sparkles {
+    position: absolute;
+    font-size: 30px;
+    color: #c2185b;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+.sparkle1 {
+    top: 35%;
+    right: 10%;
+    transform: scale(1.2);
+}
+
+.sparkle2 {
+    top: 65%;
+    left: 15%;
+    transform: scale(0.9);
+}
+
+/* Flying dynamic balloons */
+.flying-balloon {
+    position: fixed;
+    bottom: -100px;
+    width: 60px;
+    height: 75px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    animation: flyUp 5s ease-in forwards;
+    z-index: 100;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.flying-balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 26px;
+    width: 8px;
+    height: 12px;
+    background: inherit;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+@keyframes flyUp {
+    0% {
+        transform: translateY(0) rotate(var(--rot)) scale(1);
+        opacity: 0;
+    }
+
+    10% {
+        transform: translateY(-10vh) rotate(var(--rot)) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120vh) rotate(var(--rot)) scale(1);
+        opacity: 0.8;
+    }
+}
+
+/* Interactive Cake Container */
+.cake-interact-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 20px auto 0;
+    transition: opacity 0.5s;
+    animation: floatCake 4s ease-in-out infinite;
+}
+
+@keyframes floatCake {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.cake-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    filter: contrast(1.1);
+    border-radius: 10px;
+}
+
+/* Interactive Candles */
+.interact-candle {
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 80px;
+    transition: transform 0.2s;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.interact-candle:hover {
+    transform: scale(1.05);
+}
+
+.candle-2 {
+    top: 5px;
+    left: 80px;
+}
+
+.candle-1 {
+    top: 5px;
+    left: 130px;
+}
+
+.interact-candle .number {
+    font-weight: 900;
+    font-size: 65px;
+    color: #ff0844;
+    text-shadow:
+        -2px -2px 0 #fff,
+        2px -2px 0 #fff,
+        -2px 2px 0 #fff,
+        2px 2px 0 #fff,
+        0px 5px 5px rgba(0, 0, 0, 0.3);
+    font-family: 'Outfit', sans-serif;
+    position: relative;
+    z-index: 2;
+}
+
+.interact-candle .wick {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 12px;
+    background: #333;
+    z-index: 1;
+}
+
+/* Flame */
+.interact-candle .flame {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 28px;
+    background: #ffcc00;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    box-shadow: 0 0 15px #ffcc00, 0 0 30px #ff9900;
+    animation: flicker 0.5s infinite alternate;
+    transition: opacity 0.5s, transform 0.5s;
+    z-index: 3;
+}
+
+.interact-candle .flame.blown {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px) scale(0.5);
+    animation: none;
+}
